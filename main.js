@@ -489,6 +489,48 @@ const App = {
       `;
     },
 
+    'join-form': function() {
+      const group = store.groups.find(g => g.id === App.selectedGroupId);
+      if (!group) return `<p style="color:red; text-align:center; margin-top: 2rem;">Error: Group not found.</p>`;
+      
+      return `
+        <div class="card" style="max-width: 600px; margin: 0 auto; border-top: 4px solid var(--accent);">
+          <h3>Registration: ${group.name}</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Join this chit group by filling out your details below.</p>
+          <div style="background: rgba(var(--primary-rgb), 0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between;">
+              <span><strong>Total Value:</strong> ₹ ${group.totalValue}</span>
+              <span><strong>Monthly:</strong> ₹ ${group.installment}</span>
+              <span><strong>Duration:</strong> ${group.durationMonths} Mo</span>
+            </div>
+          </div>
+          <form id="customer-join-form" onsubmit="App.handleCustomerJoin(event)">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+              <label>Mobile Number (WhatsApp) *</label>
+              <input type="tel" name="phone" required placeholder="e.g. 9876543210">
+            </div>
+            <div class="form-group">
+              <label>Email Address (Optional)</label>
+              <input type="email" name="email" placeholder="example@email.com">
+            </div>
+            <div class="form-group">
+              <label>Preferred Payment Mode *</label>
+              <select name="paymentMode" required>
+                <option value="UPI">UPI (GPay/PhonePe)</option>
+                <option value="UPI_ID">UPI ID</option>
+                <option value="BANK_TRANSFER">Bank Transfer</option>
+              </select>
+            </div>
+            <button type="submit" class="primary" style="width: 100%; font-size: 1.1rem; padding: 12px; background: var(--accent);">Confirm Registration</button>
+          </form>
+        </div>
+      `;
+    },
+
     login() {
       return `
         <div style="max-width: 400px; margin: 4rem auto;">
