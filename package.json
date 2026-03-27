@@ -10,8 +10,10 @@
     "test": "vitest run",
     "package": "npm run build && node scripts/package.js"
   },
+  "dependencies": {
+    "vite": "^5.0.0"
+  },
   "devDependencies": {
-    "vite": "^5.0.0",
     "vitest": "^4.1.1"
   }
 }
